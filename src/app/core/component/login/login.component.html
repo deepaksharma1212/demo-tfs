@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Register</title>
+<title>Login</title>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <style>
@@ -43,28 +43,22 @@ section#register button{    width: 100%;
  <div class="container">
   <div class="row">
 	<div class="col-xs-6 col-sm-5 col-md-4 col-sm-offset-1 col-md-offset-2">
-      <img src="../../../../assets/images/register.jpg" />
+      <img src="../../../../assets/images/login.jpg" />
     </div>
     <div class="col-xs-6 col-sm-5 col-md-4 col-sm-offset-1 col-md-offset-2">
-	<h3><img src="../../../../assets/images/note.png"/> Register</h3>
-      <form>
+	<h3><img src="../../../../assets/images/login.png"/> Login</h3>
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
         <div id="user-data">
           <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" id="username" class="form-control">
+            <input type="text" id="username" name="email" [(ngModel)]="userModel.email" class="form-control">
           </div>
           <div class="form-group">
-            <label for="email">Mail</label>
-            <input type="email" id="email" class="form-control">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" [(ngModel)]="userModel.password" class="form-control">
           </div>
         </div>
-        <div class="form-group">
-          <label for="secret">Secret Questions</label>
-          <select id="secret" class="form-control">
-            <option value="pet">Your first Pet?</option>
-            <option value="teacher">Your first teacher?</option>
-          </select>
-        </div>
+		<button class="btn btn-primary" type="submit">Login</button>
         <button class="btn btn-primary" type="button">Register</button>
       </form>
     </div>

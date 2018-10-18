@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutModule } from './module/layout/layout.module';
-import { LoginModule } from './module/login/login.module';
+import { LoginComponent } from './core/component/login/login.component';
+import { RegisterComponent} from './core/component/register/register.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 
 const routes: Routes = [
 
   { path: 'app', loadChildren: () => LayoutModule },
-  { path: 'login', loadChildren: () => LoginModule },
-  { path: 'register', loadChildren: () => LoginModule },
+  { path: 'login', component : LoginComponent},
+  { path: 'register', component : RegisterComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'logout', loadChildren: () => LoginModule },
+  { path: 'logout', component : LoginComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: '**', redirectTo: 'not-found' }
 ];
