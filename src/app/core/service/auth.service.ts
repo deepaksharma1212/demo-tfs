@@ -26,12 +26,11 @@ export class AuthService {
     SpinnerUtil.showSpinner();
      return this.authentication.doLogin(user)
       .map(response =>  {
-        debugger;
         if (!response.hasError) {
           SpinnerUtil.hideSpinner();
           ToastrUtil.showSuccesMessage('',response.dataSource,3000);
           localStorage.setItem('UserToken',response.userToken);
-          this.router.navigate(['app']);
+          this.router.navigate(['/app']);
           return true;
         } else if(response.hasError){
           SpinnerUtil.hideSpinner();
