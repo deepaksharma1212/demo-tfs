@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../model/user';
 import { AuthService } from '../../service/auth.service';
 
+import { Router } from '@angular/router';
+
+import { ToastrUtil } from '../../util/toastr-util';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,28 +14,19 @@ import { AuthService } from '../../service/auth.service';
 export class LoginComponent implements OnInit {
 
   userModel : User;
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private router : Router) { }
 
   ngOnInit() {
     this.userModel = new User();
   }
 
   onSubmit(): void {
-    debugger;
     if (this.valildateLogin()) {
       this.auth
       .login(this.userModel).subscribe();
     }else{
-      //SpinnerUtil.hideSpinner();
+      ToastrUtil.showErrorMessage('','Username or Password should not be empty',3000);
     }
-  }
-
-  valildateRegister(): Boolean {
-    let isValid:Boolean = true;
-    if (!this.userModel.email || !this.userModel.password || !this.userModel.confirmPassword || !this.userModel.phoneNumber) {
-        isValid = false;
-    }
-    return isValid;
   }
 
   valildateLogin(): Boolean {
@@ -40,6 +35,10 @@ export class LoginComponent implements OnInit {
         isValid = false;
     }
     return isValid;
+  }
+
+  gotoRegister() : void{
+    this.router.navigate(['/register']);
   }
 
 

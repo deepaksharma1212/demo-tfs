@@ -1,7 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+
+import { ToastrModule, ToastNoAnimation, ToastNoAnimationModule } from 'ngx-toastr';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +23,11 @@ import { AuthenticationApi } from './core/http/authentication-api';
 //Import Service Classes
 import { AuthService } from './core/service/auth.service';
 
+//Import Util Classes
+import { AppUtil } from '../app/core/util/app-util';
+import { SpinnerUtil } from '../app/core/util/spinner-util';
+import { ToastrUtil } from '../app/core/util/toastr-util';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,13 +38,19 @@ import { AuthService } from './core/service/auth.service';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastNoAnimationModule,
+    ToastrModule.forRoot({ toastComponent: ToastNoAnimation }),
+    NgxSpinnerModule,
   ],
   providers: [Authentication,
   AuthenticationApi,
-  AuthService
+  AuthService,
+  NgxSpinnerService,
+  AppUtil,SpinnerUtil,ToastrUtil
   ],
   bootstrap: [AppComponent]
 })

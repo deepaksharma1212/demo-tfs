@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../model/user';
 import { AuthService } from '../../service/auth.service';
 
-
+import { ToastrUtil }  from '../../util/toastr-util';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -21,20 +21,9 @@ export class RegisterComponent implements OnInit {
     if (this.valildateRegister()) {
       this.auth
       .register(this.userModel)
-      .subscribe(response => {
-        if(!response['hasError']){
-          window.localStorage.setItem('UserToken',response['userToken']);
-        }else{
-          //Error Msg
-        }
-        //SpinnerUtil.hideSpinner();
-      },err => {
-       // SpinnerUtil.hideSpinner();
-        //ToastrUtil.showErrorMessage('Login', 'Unauthorized User',3000);
-        console.log(err)
-      });
+      .subscribe();
     }else{
-      //SpinnerUtil.hideSpinner();
+     ToastrUtil.showErrorMessage('','All fields are mandatory',3000);
     }
   }
 
